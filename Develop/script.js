@@ -17,7 +17,7 @@ $(function () {
       // This function will add a color to each section to represent wether its in the past, present, or future
       if(hourEl == time){
         divData.classList.add("present")
-      }else if(hourEl < time){
+      }else if(hourEl > time){
         divData.classList.add("past")
       }else {
         divData.classList.add("future")
