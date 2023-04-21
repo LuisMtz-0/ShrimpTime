@@ -1,17 +1,12 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-
-// const dayjs = require("dayjs");
-
-// in the html.
 $(function () {
 
   let editBtn = document.querySelectorAll("button");
   let divData = document.querySelectorAll("div[id]")
+  // This will retrieve the storage data and parse if the page has one otherwise it will just provide and empty array
   let storage = localStorage.getItem('storageData') ? JSON.parse(localStorage.getItem('storageData')) : []
   // console.log(storage)
   addingData()
-
+// This function is in charged of adding all the localStorage data to its respective id and adding its class by time
   function addingData() {
     divData.forEach((divData) => {
       let time = divData.getAttribute("num")
@@ -22,7 +17,7 @@ $(function () {
       // This function will add a color to each section to represent wether its in the past, present, or future
       if(hourEl == time){
         divData.classList.add("present")
-      }else if(hourEl > time){
+      }else if(hourEl < time){
         divData.classList.add("past")
       }else {
         divData.classList.add("future")
@@ -36,7 +31,7 @@ $(function () {
       })
     })
   }
-
+// Even listener for each Btn in the document and which ever is clicked it will run the event function to add the 'readOnly' class or remove it if it has one
   editBtn.forEach(editBtn => {
     editBtn.addEventListener('click', (event) => {
       let parentId = event.target.parentElement.id
@@ -54,8 +49,9 @@ $(function () {
       }
 
     })
-
+// This function is on charge of add the data to local storage
     function localAdd(textArea, parentId) {
+      // This will cycle through each each element in in 'storage' to check if there is already and item with the same id and will replace it
       storage.forEach((e, i) => {
         // console.log(`${i}: ${e.parentId}`)
         storage = storage.filter(parent => parent.parentId != parentId)
@@ -67,24 +63,7 @@ $(function () {
 
     }
   });
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
+  // This will get the time giving it the format
   let newDate = dayjs().format('hh:mm  MM/DD/YY');
   let timerEl = document.getElementById("timerEl")
 
