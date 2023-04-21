@@ -17,6 +17,9 @@ To initialize a new entry for time the user would need to select the button next
 
 The timer will display the current time and the js function that will cycle through each div that has a number that will display the color change depending on the current time. 
 
+[shrimpTimeVid.webm](https://user-images.githubusercontent.com/118570822/233745998-640da17c-898d-4125-a6ad-1c52342c35a8.webm)
+
+
 ## License
  
 Look at repository
